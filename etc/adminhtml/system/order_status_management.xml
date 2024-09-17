@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="order_status_management" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+           translate="label">
+        <label>Status Management</label>
+        <field id="order_status_approved" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Order status when payment is approved</label>
+            <source_model>Payco\Payments\Model\Adminhtml\System\Config\Source\Order\Status</source_model>
+            <config_path>payment/payco_payments/order_status_approved</config_path>
+        </field>
+        <field id="order_status_pending" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Order status when payment is pending</label>
+            <source_model>Payco\Payments\Model\Adminhtml\System\Config\Source\Order\Status</source_model>
+            <config_path>payment/payco_payments/order_status_pending</config_path>
+        </field>
+        <field id="order_status_rejected" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Order status when payment is rejected</label>
+            <source_model>Payco\Payments\Model\Adminhtml\System\Config\Source\Order\Status</source_model>
+            <config_path>payment/payco_payments/order_status_rejected</config_path>
+        </field>
+        <field id="order_status_cancelled" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Order status when payment is canceled</label>
+            <source_model>Payco\Payments\Model\Adminhtml\System\Config\Source\Order\Status</source_model>
+            <config_path>payment/payco_payments/order_status_cancelled</config_path>
+        </field>
+    </group>
+</include>

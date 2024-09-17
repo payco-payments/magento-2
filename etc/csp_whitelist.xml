@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="connect-src">
+            <values>
+                <value id="paycopayments" type="host">https://api.payments.payco.com.br/</value>
+                <value id="paycopayments_prod" type="host">https://prod-api-payments.payco.com.br/</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

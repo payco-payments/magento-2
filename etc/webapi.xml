@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/payco/webhook/pix" method="POST">
+        <service class="Payco\Payments\Api\Webhook\PixInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/payco/interest/simulate" method="POST">
+        <service class="Payco\Payments\Api\SimulateInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+     <route url="/V1/guest-carts/:cartId/payco/set-interest" method="POST">
+        <service class="Payco\Payments\Api\GuestInterestInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/payco/set-interest" method="POST">
+        <service class="Payco\Payments\Api\InterestInterface" method="execute"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>

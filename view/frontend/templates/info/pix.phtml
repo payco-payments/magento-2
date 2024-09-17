@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var $block \Payco\Payments\Block\Info\Pix
+ * @var $order \Magento\Sales\Model\Order
+ */
+
+$order = $block->getOrder();
+$paymentInfo = $order->getPayment()->getAdditionalInformation();
+?>
+<?php if ($order->getPayment()->getMethod() === 'payco_payments_pix' && isset($paymentInfo['payco'])): ?>
+    <?php
+    $qrCodeImage = $paymentInfo['payco']['qr_code_url'];
+    $expirationDate = $paymentInfo['payco']['expiration_date'];
+    $qrcode = $paymentInfo['payco']['qr_code'];
+    $transactionId = $paymentInfo['payco']['transaction_id'] ?? '';
+    ?>
+    <div class="payco-payments-pix">
+        <h3 class="title"><?=$order->getPayment()->getMethodInstance()->getTitle()?></h3>
+        <div class="qrcode-image">
+            <img src="<?= $block->escapeHtml($qrCodeImage) ?>"
+                 alt="<?= $block->escapeHtml(__('Pix')) ?>"
+                 width="300"/>
+        </div>
+        <?php if ($transactionId): ?>
+            <div class="info-pix">
+                <strong><?= __('Identifier: ') ?></strong>
+                <span><?= $transactionId ?></span>
+            </div>
+        <?php endif; ?>
+        <textarea readonly style="min-height: 235px">
+            <?= $block->escapeHtml($qrcode) ?>
+        </textarea>
+    </div>
+<?php endif; ?>

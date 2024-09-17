@@ -1,0 +1,15 @@
+<?php
+/* @var $block Magento\Framework\View\Element\Template */
+
+$cryptographyViewModel = $block->getData('cryptography_view_model');
+?>
+<script>
+    require([
+        'paycoSdk'
+    ], function(
+        paycoSdk
+    ) {
+        'use strict';
+        paycoSdk.initialize({ keyId: window.checkoutConfig.payco_payments.key_id })
+    });
+</script>

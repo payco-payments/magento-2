@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="credit_card" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+           translate="label">
+        <label>Credit Card</label>
+        <field id="active" type="select" sortOrder="10" showInWebsite="1" showInStore="1"
+               showInDefault="1" translate="label">
+            <label>Enabled</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/payco_payments_credit_card/active</config_path>
+        </field>
+        <field id="title" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1"
+               translate="label">
+            <label>Title</label>
+            <config_path>payment/payco_payments_credit_card/title</config_path>
+        </field>
+        <field id="type_payment_action" translate="label" type="select" sortOrder="40" showInDefault="1"
+               showInWebsite="1" showInStore="1">
+            <label>Payment Action</label>
+            <source_model>Payco\Payments\Model\Adminhtml\System\Config\Source\PaymentAction</source_model>
+            <validate>validate-select</validate>
+            <config_path>payment/payco_payments_credit_card/type_payment_action</config_path>
+        </field>
+        <field id="apply_interest" type="select" sortOrder="45" showInWebsite="1" showInStore="1"
+               showInDefault="1" translate="label">
+            <label>Apply Interest</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/payco_payments_credit_card/apply_interest</config_path>
+        </field>
+        <field id="max_installments" translate="label" type="select" sortOrder="50" showInDefault="1"
+               showInWebsite="1" showInStore="1">
+            <label>Maximum number of installments</label>
+            <source_model>Payco\Payments\Model\Adminhtml\System\Config\Source\Installments</source_model>
+            <validate>validate-select</validate>
+            <config_path>payment/payco_payments_credit_card/max_installments</config_path>
+            <depends>
+                <field id="apply_interest">0</field>
+            </depends>
+        </field>
+        <field id="min_amount_installments" translate="label" type="text" sortOrder="60" showInDefault="1"
+               showInWebsite="1" showInStore="1">
+            <label>Minimum amount to show installment</label>
+            <comment>keep empty or zero to always show</comment>
+            <config_path>payment/payco_payments_credit_card/min_amount_installments</config_path>
+            <depends>
+                <field id="apply_interest">0</field>
+            </depends>
+        </field>
+    </group>
+</include>

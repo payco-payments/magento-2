@@ -1,0 +1,537 @@
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .payco-payments-pix {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #473F3F;
+        margin: 4rem 0;
+        border: 1px solid #F1F1F1;
+        max-width: max-content;
+        padding: 4.8rem 3.2rem;
+        border-radius: 16px;
+        box-sizing: border-box;
+
+        .header {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+
+            h2 {
+                max-width: 50rem;
+                text-align: left;
+                flex: 1;
+                color: #18024B;
+                font-weight: 700;
+                text-transform: uppercase;
+
+                .price {
+                    font-size: inherit;
+                }
+            }
+
+            .logo {
+                display: flex;
+                margin: 0;
+            }
+        }
+
+        .details {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .information {
+            text-align: left;
+        }
+
+        .qrcode-image {
+            padding: 16px;
+            border: 1px #F1F1F1 solid;
+            border-radius: 8px;
+        }
+
+        .qrcode-container {
+            position: relative;
+
+            .payment-paid {
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
+        }
+
+        .copy-pix {
+            font-size: 1.6rem;
+            background: #601DFA;
+            color: #fff;
+            border-color: #601DFA;
+            width: 100%;
+            margin-top: 2rem;
+            transition: all .2s;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 42px;
+
+            &:hover {
+                background: #573BE8;
+                border-color: #573BE8;
+                color: #fff;
+            }
+
+            &:active {
+                background: #573BE8;
+                border-color: #573BE8;
+                color: #fff;
+            }
+
+            &:focus {
+                background: #573BE8;
+                border-color: #573BE8;
+                color: #fff;
+            }
+
+            svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            span {
+                margin: 0;
+                font-weight: 400;
+                text-transform: uppercase;
+            }
+        }
+
+        .status {
+            margin-bottom: 14px;
+
+            span {
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+
+            .paid {
+                background: rgba(16, 185, 129, 0.1);
+
+                span {
+                    color: #10B981;
+                    font-size: 16px
+                }
+            }
+
+            .expired {
+                background: rgba(255, 0, 0, 0.1);
+
+                span {
+                    color: #FF0000;
+                    font-size: 16px
+                }
+            }
+
+            .failed {
+                background: rgba(255, 0, 0, 0.1);
+
+                span {
+                    color: #FF0000;
+                    font-size: 16px
+                }
+            }
+
+            .pending {
+                background: rgba(234, 179, 8, 0.1);
+
+                span {
+                    color: #EAB308;
+                    font-size: 16px
+                }
+            }
+
+            #status-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 16px;
+                height: 32px;
+                text-align: center;
+            }
+        }
+
+        [data-status="expired"] {
+            .qrcode-image {
+                .qrcode-pix {
+                    filter: blur(4px);
+                }
+            }
+
+            .actions {
+                display: none;
+            }
+        }
+
+        [data-status="failed"] {
+            .qrcode-image {
+                .qrcode-pix {
+                    filter: blur(4px);
+                }
+            }
+
+            .actions {
+                display: none;
+            }
+        }
+
+        [data-status="paid"] {
+            .qrcode-image {
+                .qrcode-pix {
+                    filter: blur(4px);
+                }
+            }
+
+            .copy-past {
+                display: none;
+            }
+
+            .share-payment {
+                display: none;
+            }
+
+            .view-order {
+                display: block;
+            }
+
+            .share-payment{
+                display: none;
+            }
+
+            .copy-pix{
+                display: none;
+            }
+
+            .qrcode-container {
+                .payment-paid {
+                    display: block !important;
+                }
+            }
+        }
+
+        .expiration-container {
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+
+            strong {
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;
+            }
+
+            .timer {
+                display: inline-block;
+
+                span {
+                    font-size: 16px;
+                    margin: 0;
+                    color: rgba(28, 28, 28, 0.5);
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .identifier {
+            margin-bottom: 12px;
+
+            strong {
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;
+                font-size: 16px;
+            }
+
+            span {
+                font-size: 16px;
+                margin: 0;
+                color: rgba(28, 28, 28, 0.5);
+                font-weight: 400;
+            }
+        }
+
+        .order {
+            strong {
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;
+                font-size: 16px;
+            }
+
+            span {
+                font-size: 16px;
+                margin: 0;
+                color: rgba(28, 28, 28, 0.5);
+                font-weight: 400;
+            }
+        }
+
+        .actions {
+            & > :not([hidden]) ~ :not([hidden]) {
+                margin-top: 6px;
+            }
+        }
+
+        .share-payment {
+            .action.secondary {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(96, 29, 250, 0.1);
+                border: none;
+                border-radius: 16px;
+                height: 42px;
+                gap: 10px;
+                color: #601DFA;
+                font-weight: 400;
+                text-transform: uppercase;
+
+                span {
+                    margin: 0;
+                }
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        .view-order {
+            display: none;
+            a {
+                height: 42px;
+                background: #601DFA;
+                color: #fff;
+                font-size: 1.6rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                display: flex;
+                width: auto;
+                align-items: center;
+                justify-content: center;
+                border-radius: 16px;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .footer {
+            width: 100%;
+            text-align: left;
+            color: #BBBBBB;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 16px;
+
+            a {
+                color: #BBBBBB;
+
+                &:focus {
+                    color: #BBBBBB;
+                }
+
+                &:hover {
+                    color: #BBBBBB;
+                }
+
+                &:active {
+                    color: #BBBBBB;
+                }
+            }
+
+            & > :not([hidden]) ~ :not([hidden]) {
+                margin-right: 6px;
+            }
+        }
+    }
+
+    .payco_payments_credit_card {
+        max-width: 500px;
+
+        .field {
+            > .label {
+                display: block;
+                font-weight: 700;
+            }
+
+            &:not(.choice) {
+                > .label {
+                    width: auto;
+                    font-weight: 700;
+                }
+
+                > .control {
+                    width: 100%;
+                }
+            }
+        }
+
+        .fields.date-cvv.group {
+            display: flex;
+            gap: 25px;
+
+            > .field {
+                width: 50%;
+            }
+        }
+
+        .field.date {
+            input {
+                width: 100%;
+            }
+
+            .fields.group.group-2 {
+                .field {
+                    width: 100% !important;
+                    padding: 0;
+                }
+            }
+        }
+
+        .field.cvv {
+            .input-text {
+                width: 100%;
+                margin: 0;
+            }
+
+            .control {
+                .field-tooltip {
+                    left: unset;
+                    right: 10px;
+                }
+            }
+        }
+    }
+
+    .payco_payments_credit_card.ccard {
+        .number {
+            .input-text {
+                width: 100%;
+            }
+
+            .control {
+                position: relative;
+
+                .credit-card-types {
+                    position: absolute;
+                    right: 9px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+
+    .checkout-payment-method {
+        .payco_payments_credit_card {
+            .field.cvv {
+                .input-text {
+                    width: 100%;
+                    margin: 0;
+                }
+            }
+
+            .credit-card-types {
+                .item {
+                    margin: 0;
+                    transition: all .2s;
+                    height: 23px;
+                }
+
+                img {
+                    width: 36px;
+                    -webkit-filter: unset;
+                }
+
+                .item._inactive {
+                    opacity: 1;
+                    width: 1px;
+                    height: 1px;
+                }
+            }
+        }
+
+        .payco_payments_credit_card.ccard {
+            .number {
+                .input-text {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .sales-order-view {
+        .payco-payments-pix {
+            padding: 0 2rem 3rem;
+            margin-top: 0;
+
+            .qrcode-image {
+                border: none;
+                padding: 0;
+            }
+
+            .info-pix {
+                font-size: 1.2rem;
+                margin: 1rem 0;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .payco-payments-pix {
+        .header {
+            flex-direction: column-reverse;
+
+            img {
+                width: 150px;
+                margin: auto;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .details {
+            flex-direction: column;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+            margin-top: 48px;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+
+}

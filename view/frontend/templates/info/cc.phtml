@@ -1,0 +1,53 @@
+<?php
+/**
+ * @var $block \Payco\Payments\Block\Info\Cc
+ * @var $order \Magento\Sales\Model\Order
+ */
+
+$order = $block->getOrder();
+$paymentInfo = $order->getPayment()->getAdditionalInformation();
+$title = $block->escapeHtml(__($block->getMethod()->getTitle()));
+?>
+<?php if ($order->getPayment()->getMethod() === 'payco_payments_credit_card' && isset($paymentInfo['payco'])): ?>
+    <table>
+        <h3 class="table-caption"><?= /* @noEscape */ $title ?></h3>
+        <tbody>
+        <?php if ($paymentInfo['payco']['installments']) : ?>
+            <tr>
+                <th scope="row"><?= $block->escapeHtml(__('Installments:')); ?></th>
+                <td><?= $block->escapeHtml($paymentInfo['payco']['installments']); ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($paymentInfo['payco']['cc_type']) : ?>
+            <tr>
+                <th scope="row"><?= $block->escapeHtml(__('Card Type:')); ?></th>
+                <td><?= $block->escapeHtml($paymentInfo['payco']['cc_type']); ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($paymentInfo['payco']['cc_encrypt_card']) : ?>
+            <tr>
+                <th scope="row"><?= $block->escapeHtml(__('Card Number:')); ?></th>
+                <td><?= $block->escapeHtml($paymentInfo['payco']['cc_encrypt_card']); ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($paymentInfo['payco']['cc_holder_name']) : ?>
+            <tr>
+                <th scope="row"><?= $block->escapeHtml(__('Card Holder Name:')); ?></th>
+                <td><?= $block->escapeHtml($paymentInfo['payco']['cc_holder_name']); ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($paymentInfo['payco']['cc_exp_month']) : ?>
+            <tr>
+                <th scope="row"><?= $block->escapeHtml(__('Card Exp Month:')); ?></th>
+                <td><?= $block->escapeHtml($paymentInfo['payco']['cc_exp_month']); ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($paymentInfo['payco']['cc_exp_year']) : ?>
+            <tr>
+                <th scope="row"><?= $block->escapeHtml(__('Card Exp Year:')); ?></th>
+                <td><?= $block->escapeHtml($paymentInfo['payco']['cc_exp_year']); ?></td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+<?php endif; ?>

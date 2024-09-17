@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="payco_base" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label><![CDATA[<div class='payco-payment-logo'></div>]]></label>
+                <comment><![CDATA[Receive payments with Credit Cards, Pix, Open Finance, and Boleto Bancário. <br/> Approve with more security with our included anti-fraud system.]]></comment>
+                <fieldset_css>payco-payment-section</fieldset_css>
+                <frontend_model>Payco\Payments\Model\Adminhtml\Source\PaymentGroup</frontend_model>
+                <include path="Payco_Payments::system/basic_setting.xml"/>
+                <include path="Payco_Payments::system/credentials.xml"/>
+                <include path="Payco_Payments::system/order_status_management.xml"/>
+                <include path="Payco_Payments::system/pix.xml"/>
+                <include path="Payco_Payments::system/credit_card.xml"/>
+            </group>
+        </section>
+    </system>
+</config>

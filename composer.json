@@ -1,0 +1,17 @@
+{
+  "name": "payco/module-payments",
+  "version": "1.0.0",
+  "description": "Receive payments with Credit Cards, Pix, Open Finance, and Boleto Bancário. Approve with more security with our included anti-fraud system.",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Payco\\Payments\\": ""
+    }
+  }
+}

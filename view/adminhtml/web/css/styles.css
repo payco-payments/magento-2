@@ -1,0 +1,38 @@
+.payco-payment-section .config-heading {
+    height: 150px;
+}
+
+.payco-payment-section .heading {
+    background: url("../images/paycopayments.png") no-repeat 0 50% / 20rem auto;
+    padding-left: 21rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.payco-payment-section .button-container {
+    float: right;
+}
+
+.section-config.payco-payment-section.with-button .config-heading .button-container{
+    margin-top:3rem
+
+}
+
+.payco-payment-section .config-alt {
+    background: url("../images/bandeiras.png") no-repeat scroll 0 0 / 100% auto;
+    height: 40px;
+    margin: 0.5rem 0 0;
+    width: 450px;
+}
+
+.payco-credentials-success-message {
+    background: none;
+    margin: 0;
+}
+
+
+.payco-payment-section .config.admin__collapsible-block {
+    padding-left:50px
+}

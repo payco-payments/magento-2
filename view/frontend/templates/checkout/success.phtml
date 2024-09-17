@@ -1,0 +1,123 @@
+<?php
+/**
+ * @var $block \Payco\Payments\Block\Checkout\Success
+ * @var $order \Magento\Sales\Model\Order
+ */
+
+$order = $block->getOrder();
+$paymentInfo = $order->getPayment()->getAdditionalInformation();
+?>
+<?php if ($order->getPayment()->getMethod() === 'payco_payments_pix'): ?>
+    <?php
+        $qrCodeImage = $paymentInfo['payco']['qr_code_base64'];
+        $expirationDate = $paymentInfo['payco']['expiration_date'];
+        $pixKey = $paymentInfo['payco']['qr_code'];
+        $pixId = $paymentInfo['payco']['pix_id'];
+        $identifier = $paymentInfo['payco']['transaction_id'];
+        $companyName = $block->getCompanyName()!=='' ? __('to %1',$block->getCompanyName()) : '';
+    ?>
+    <div class="payco-payments-pix">
+        <div class="header">
+            <h2><?=__('Pay %1 %2 via pix',$order->formatPrice($order->getPayment()->getAmountOrdered()), $companyName)?></h2>
+            <?=$block->getChildHtml('payco.company.logo')?>
+        </div>
+
+        <div class="details">
+            <div class="qrcode-image">
+                <div class="qrcode-container">
+                    <img class="qrcode-pix" src="data:image/png;base64,<?= $block->escapeHtml($qrCodeImage) ?>"
+                         alt="<?= $block->escapeHtml(__('Pix')) ?>"
+                         width="300"/>
+                    <img class="payment-paid" src="<?=$block->getViewFileUrl('Payco_Payments::images/paid.png')?>" alt="<?=__('payment paid')?>" style="display:none;"/>
+                </div>
+            </div>
+            <div class="information">
+                <div class="status" id="status-update">
+                    <div class="pending" id="status-container">
+                        <span><?= __('Awaiting payment') ?></span>
+                    </div>
+                </div>
+                <div class="expiration-container" id="expiration">
+                    <strong><?= __('qrcode expires on:') ?></strong>
+                    <div class="timer">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="identifier">
+                    <strong><?=__('identifier: ')?></strong>
+                    <span><?=$identifier?></span>
+                </div>
+                <div class="order">
+                    <strong><?=__('order: ')?></strong>
+                    <span><?=$order->getIncrementId()?></span>
+                </div>
+                <div class="actions">
+                    <div class="copy-past">
+                        <button class="copy-pix action primary" id="clickToCopy">
+                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.334 5.83301H6.66732C5.93094 5.83301 5.33398 6.42996 5.33398 7.16634V13.833C5.33398 14.5694 5.93094 15.1663 6.66732 15.1663H13.334C14.0704 15.1663 14.6673 14.5694 14.6673 13.833V7.16634C14.6673 6.42996 14.0704 5.83301 13.334 5.83301Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2.66732 11.1663C1.93398 11.1663 1.33398 10.5663 1.33398 9.83301V3.16634C1.33398 2.43301 1.93398 1.83301 2.66732 1.83301H9.33398C10.0673 1.83301 10.6673 2.43301 10.6673 3.16634" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                            <span><?= __('Copy QrCode copy and paste') ?></span>
+                        </button>
+                        <span class="message"></span>
+                        <script>
+                            const clicktoCopy = document.querySelector("#clickToCopy");
+
+                            clicktoCopy.addEventListener('click', () => {
+                                const chavePix = "<?=$pixKey?>";
+                                navigator.clipboard.writeText(chavePix);
+                                document.querySelector('.payco-payments-pix .copy-pix span').innerHTML = "<?= __("Pix key copied successfully!") ?>";
+                                setTimeout(function () {
+                                    document.querySelector('.payco-payments-pix .copy-pix span').innerHTML = "<?= __('Copy QrCode copy and paste') ?>";
+                                }, 3000)
+                            });
+                        </script>
+                    </div>
+                    <div class="share-payment">
+                        <button class="action secondary">
+                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 5.83301C13.1046 5.83301 14 4.93758 14 3.83301C14 2.72844 13.1046 1.83301 12 1.83301C10.8954 1.83301 10 2.72844 10 3.83301C10 4.93758 10.8954 5.83301 12 5.83301Z" stroke="#601DFA" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 10.5C5.10457 10.5 6 9.60457 6 8.5C6 7.39543 5.10457 6.5 4 6.5C2.89543 6.5 2 7.39543 2 8.5C2 9.60457 2.89543 10.5 4 10.5Z" stroke="#601DFA" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15.167C13.1046 15.167 14 14.2716 14 13.167C14 12.0624 13.1046 11.167 12 11.167C10.8954 11.167 10 12.0624 10 13.167C10 14.2716 10.8954 15.167 12 15.167Z" stroke="#601DFA" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.72656 9.50684L10.2799 12.1602" stroke="#601DFA" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.2732 4.83984L5.72656 7.49318" stroke="#601DFA" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span><?=__('Share Payment')?></span>
+                        </button>
+                    </div>
+                    <div class="view-order">
+                        <a href="/sales/order">
+                            <span><?=__('Go to order')?></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <span><?=__('Powered by Payments by Payco')?></span>
+            <a href="#">
+                <span><?=__('Terms of use')?></span>
+            </a>
+            <a href="#">
+                <span><?=__('Privacy policies')?></span>
+            </a>
+        </div>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#expiration": {
+                "widgetExpiration": {
+                    "expirationDate":"<?= $expirationDate ?>"
+                }
+            },
+            "#status-update": {
+                "updateStatus":{
+                    "transactionId": "<?= $pixId ?>",
+                    "expirationContainer": "#expiration"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

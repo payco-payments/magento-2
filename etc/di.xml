@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="PaycoPaymentsLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Payco\Payments\Logger\Handler\LoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Payco\Payments\Helper\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">PaycoPaymentsLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="Payco\Payments\Block\Info\Pix">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Payco\Payments\Block\Info\Cc">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <preference for="Payco\Payments\Api\Webhook\PixInterface" type="Payco\Payments\Model\Api\Webhook\Pix"/>
+    <preference for="Payco\Payments\Api\SimulateInterface" type="Payco\Payments\Model\Api\Simulate"/>
+    <preference for="Payco\Payments\Api\RequestInterface" type="Payco\Payments\Model\Request"/>
+    <preference for="Payco\Payments\Api\InterestInterface" type="Payco\Payments\Model\Api\Interest"/>
+    <preference for="Payco\Payments\Api\GuestInterestInterface" type="Payco\Payments\Model\Api\GuestInterest"/>
+
+    <type name="Payco\Payments\Block\Checkout\Success">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

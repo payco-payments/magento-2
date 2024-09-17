@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="general" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1"
+           translate="label">
+        <label>General</label>
+        <field id="company_name" type="text" sortOrder="10" showInWebsite="1" showInStore="1"
+               showInDefault="1" translate="label">
+            <label>Company Name</label>
+            <config_path>payment/payco_payments/company_name</config_path>
+        </field>
+        <field id="showCpf" type="select" sortOrder="10" showInWebsite="1" showInStore="1"
+               showInDefault="1" translate="label">
+            <label>Show CPF with the payments</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/payco_payments/showCpf</config_path>
+        </field>
+    </group>
+</include>

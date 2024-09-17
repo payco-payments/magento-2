@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Payco\Payments\Block\Checkout\Success" name="payco.payments.pix"
+                   template="Payco_Payments::checkout/success.phtml" after="-">
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="payco.company.logo" template="Payco_Payments::html/logo.phtml">
+                    <arguments>
+                        <argument name="logoPathResolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoPathResolver</argument>
+                        <argument name="logo_size_resolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolver</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
